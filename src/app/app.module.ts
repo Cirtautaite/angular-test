@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatListModule, MatSelectModule, MatSlideToggleModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -22,7 +23,6 @@ import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatListModule,
     MatGridListModule,
@@ -50,7 +51,9 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [
     DishService,
