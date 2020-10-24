@@ -27,6 +27,7 @@ import { baseURL } from './shared/baseurl';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpModule } from '@angular/http';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HttpModule } from '@angular/http';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
