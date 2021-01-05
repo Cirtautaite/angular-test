@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { flyInOut } from '../animations/app.animation';
 import { Feedback, ContactType } from '../shared/feedback';
+import { FeedbackService } from '../services/feedback.service'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @Component({
   selector: 'app-contact',
@@ -19,6 +22,10 @@ export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackErrMsg: string;
+  feedbackCopy?: Feedback;
+  fbSubmitted: boolean = false;
+  inProcess: boolean = false;
   contactType = ContactType;
   @ViewChild('fform') feedbackFormDirective;
 
@@ -49,8 +56,10 @@ export class ContactComponent implements OnInit {
       'email': 'Email not in valid format.'
     },
   };
+  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private feedbackService: FeedbackService) {
     this.createForm();
    }
 
@@ -95,16 +104,22 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.fbSubmitted =  true;
+    this.inProcess = true; 
+    this.feedbackService.postFeedback(this.feedbackForm.value)
+                  .subscribe(feedback => 
+                    this.feedback = <Feedback>feedback);
+    setTimeout(() => { 
+    this.fbSubmitted =  false;
+    this.inProcess =    false; }, 5000);
     this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: 0,
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
+    firstname: '',
+    lastname: '',
+    telnum: 0,
+    email: '',
+    agree: false,
+    contacttype: 'None',
+    message: ''
     });
     this.feedbackFormDirective.resetForm();
   }
